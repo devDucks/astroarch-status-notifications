@@ -1,0 +1,9 @@
+[package]
+name = "astroarch-status-notifications"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+notify-rust = "4.11.3"
+serde = "1.0.210"
+ureq = { version = "2.10.1", features = ["json"] }
