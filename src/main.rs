@@ -1,5 +1,3 @@
-use std::time::Duration;
-
 use notify_rust::Notification;
 use serde::Deserialize;
 
@@ -12,18 +10,15 @@ struct NotificationMessage {
 fn main() {
     match ureq::get("http://astromatto.com:9000/notifications.json").call() {
         Ok(response) => {
-            if let Ok(messages) = response.into_json::<Vec<NotificationMessage>>() {
-                for message in messages.into_iter() {
-                    let _ = Notification::new()
-                        .appname("AstroArch news")
-                        .summary(message.summary.as_ref())
-                        .body(message.body.as_ref())
-                        .icon("astroarch")
-                        .timeout(5)
-                        .show()
-                        .unwrap();
-                    std::thread::sleep(Duration::from_secs(5));
-                }
+            if let Ok(messages) = response.into_json::<NotificationMessage>() {
+                let _ = Notification::new()
+                    .appname("AstroArch news")
+                    .summary(message.summary.as_ref())
+                    .body(message.body.as_ref())
+                    .icon("astroarch")
+                    .timeout(5)
+                    .show()
+                    .unwrap();
             }
         }
         Err(_) => (),
