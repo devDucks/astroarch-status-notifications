@@ -10,7 +10,7 @@ struct NotificationMessage {
 fn main() {
     match ureq::get("http://astromatto.com:9000/notifications.json").call() {
         Ok(response) => {
-            if let Ok(messages) = response.into_json::<NotificationMessage>() {
+            if let Ok(message) = response.into_json::<NotificationMessage>() {
                 let _ = Notification::new()
                     .appname("AstroArch news")
                     .summary(message.summary.as_ref())
