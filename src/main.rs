@@ -1,3 +1,5 @@
+use std::time::Duration;
+
 use notify_rust::Notification;
 use serde::Deserialize;
 
@@ -20,6 +22,7 @@ fn main() {
                         .timeout(5)
                         .show()
                         .unwrap();
+                    std::thread::sleep(Duration::from_secs(5));
                 }
             }
         }
