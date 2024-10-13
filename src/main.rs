@@ -17,7 +17,7 @@ fn main() {
                         .summary(message.summary.as_ref())
                         .body(message.body.as_ref())
                         .icon("astroarch")
-                        .timeout(5000)
+                        .timeout(0)
                         .show()
                         .unwrap();
                 }
