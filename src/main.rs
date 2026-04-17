@@ -8,9 +8,9 @@ struct NotificationMessage {
 }
 
 fn main() {
-    match ureq::get("http://astromatto.com:9000/notifications.json").call() {
-        Ok(response) => {
-            if let Ok(messages) = response.into_json::<Vec<NotificationMessage>>() {
+    match ureq::get("http://astroarch.astromatto.com:9000/notifications.json").call() {
+        Ok(mut response) => {
+            if let Ok(messages) = response.body_mut().read_json::<Vec<NotificationMessage>>() {
                 for message in messages.into_iter() {
                     let _ = Notification::new()
                         .appname("AstroArch news")
